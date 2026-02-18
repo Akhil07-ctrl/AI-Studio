@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Soft Pastel Color Palette */
+  --pastel-pink: #ffd6e8;
+  --pastel-blue: #c7e7ff;
+  --pastel-purple: #e5d4ff;
+  --pastel-peach: #ffd4c4;
+  --pastel-mint: #d4f4dd;
+  --pastel-lavender: #e8d9ff;
+  
+  /* Neutral Colors */
+  --white: #ffffff;
+  --text-dark: #4a4a4a;
+  --text-light: #6b6b6b;
+  --border-color: #e8e8e8;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --shadow-medium: rgba(0, 0, 0, 0.12);
+  
+  /* Gradient Background */
+  --bg-gradient: linear-gradient(135deg, #ffd6e8 0%, #c7e7ff 50%, #e5d4ff 100%);
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient);
+  color: var(--text-dark);
+  padding: 1rem;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+}

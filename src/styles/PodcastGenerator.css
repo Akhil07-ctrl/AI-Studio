@@ -1,0 +1,197 @@
+/* Podcast-specific styles */
+.podcast-card {
+    background: linear-gradient(135deg, #fff5f7 0%, #f0f4ff 100%);
+}
+
+.podcast-title {
+    background: linear-gradient(135deg, #ff6b9d 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.podcast-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    background: var(--white);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.podcast-input:focus {
+    border-color: #8b5cf6;
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+}
+
+.podcast-input::placeholder {
+    color: #aaa;
+}
+
+.podcast-button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--white);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.podcast-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.4);
+    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.podcast-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.podcast-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Audio Player Area */
+.audio-player-area {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 16px;
+    border: 2px dashed var(--border-color);
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.placeholder-text {
+    color: var(--text-light);
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.generating-message {
+    text-align: center;
+}
+
+.pulse-animation {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 50%;
+    animation: pulseGrow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseGrow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.generating-message p {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* Audio Ready State */
+.audio-ready {
+    width: 100%;
+    text-align: center;
+}
+
+.success-text {
+    color: #2d6a4f;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.audio-player {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+    outline: none;
+    filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.2));
+}
+
+.audio-player::-webkit-media-controls-panel {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+/* Error Message */
+.error-message {
+    text-align: center;
+    width: 100%;
+}
+
+.error-message p {
+    color: #c1121f;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #ffd4c4 0%, #ffb3b3 100%);
+    border: 2px solid #ff6b6b;
+    border-radius: 12px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .audio-player-area {
+        padding: 1.5rem;
+        min-height: 120px;
+    }
+
+    .pulse-animation {
+        width: 50px;
+        height: 50px;
+    }
+
+    .success-text {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+}
