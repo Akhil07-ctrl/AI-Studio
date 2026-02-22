@@ -21,7 +21,7 @@ function SocialMediaPost() {
         const minLoadingTime = new Promise(resolve => setTimeout(resolve, 2000))
 
         try {
-            const apiCall = fetch('http://localhost:5678/webhook-test/effd5adb-e750-4d4b-8fc9-03def3e32aa8', {
+            const apiCall = fetch('https://workflow.ccbp.in/webhook-test/effd5adb-e750-4d4b-8fc9-03def3e32aa8', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

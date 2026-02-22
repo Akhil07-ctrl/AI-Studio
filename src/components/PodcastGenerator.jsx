@@ -22,7 +22,7 @@ function PodcastGenerator() {
         setIsLoading(true)
 
         try {
-            const response = await fetch('http://localhost:5678/webhook-test/aea3b229-b06c-454d-9b8c-4ecfd18c899f', {
+            const response = await fetch('https://workflow.ccbp.in/webhook-test/aea3b229-b06c-454d-9b8c-4ecfd18c899f', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
