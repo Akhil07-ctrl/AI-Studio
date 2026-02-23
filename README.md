@@ -135,16 +135,16 @@ FRONTEND_URL=http://localhost:5173  # For CORS
 
 ### Build for Production
 ```bash
-# Build both client and server
+# Build frontend only (server doesn't need building)
 npm run build
 
 # Or individually
 npm run build:client
-npm run dev:server    # For production use: npm start -w server
 ```
 
-### Deploy Backend (Railway Recommended)
+### Deploy Backend (Railway or Render)
 
+#### Option A: Railway.app
 1. Sign up at [railway.app](https://railway.app)
 2. Create new project → Deploy from GitHub
 3. Select `/server` as root directory
@@ -155,16 +155,33 @@ npm run dev:server    # For production use: npm start -w server
    FRONTEND_URL=https://your-app.vercel.app
    ```
 
-### Deploy Frontend (Vercel Recommended)
+#### Option B: Render.com
+1. Sign up at [render.com](https://render.com)
+2. New Web Service → Connect GitHub repo
+3. Configure settings:
+   - **Root Directory:** `server`
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+4. Add environment variables:
+   ```
+   PORT=5000
+   NODE_ENV=production
+   FRONTEND_URL=https://your-app.vercel.app
+   ```
+
+### Deploy Frontend (Vercel)
 
 1. Deploy at [vercel.com](https://vercel.com)
-2. Build settings:
-   - Build Command: `npm run build:client`
-   - Output Directory: `client/dist`
-3. Environment variables:
+2. New Project → Import GitHub repo
+3. Build settings:
+   - **Framework Preset:** Other
+   - **Build Command:** `npm run build:client`
+   - **Output Directory:** `client/dist`
+4. Environment variables:
    ```
-   VITE_API_URL=https://your-backend.railway.app
+   VITE_API_URL=https://your-backend-url.onrender.com
    ```
+   (Replace with your Render/Railway backend URL)
 
 ## 🔐 CORS & Security
 
