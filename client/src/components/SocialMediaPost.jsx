@@ -6,6 +6,8 @@ function SocialMediaPost() {
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState(null)
 
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -21,7 +23,7 @@ function SocialMediaPost() {
         const minLoadingTime = new Promise(resolve => setTimeout(resolve, 2000))
 
         try {
-            const apiCall = fetch('https://workflow.ccbp.in/webhook-test/effd5adb-e750-4d4b-8fc9-03def3e32aa8', {
+            const apiCall = fetch(`${API_BASE_URL}/api/social-media`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -7,6 +7,8 @@ function PodcastGenerator() {
     const [audioUrl, setAudioUrl] = useState(null)
     const [error, setError] = useState(null)
 
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -22,7 +24,7 @@ function PodcastGenerator() {
         setIsLoading(true)
 
         try {
-            const response = await fetch('https://workflow.ccbp.in/webhook-test/aea3b229-b06c-454d-9b8c-4ecfd18c899f', {
+            const response = await fetch(`${API_BASE_URL}/api/podcast`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
