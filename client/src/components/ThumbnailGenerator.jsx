@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FiImage } from 'react-icons/fi'
 import '../styles/ThumbnailGenerator.css'
 
 function ThumbnailGenerator() {
@@ -91,7 +92,10 @@ function ThumbnailGenerator() {
         <div className="thumbnail-container">
             <div className="thumbnail-card">
                 <div className="thumbnail-header">
-                    <h1 className="thumbnail-title">✨ Thumbnail Generator</h1>
+                    <div className="thumbnail-title-with-icon">
+                        <FiImage className="thumbnail-title-icon" />
+                        <h1 className="thumbnail-title">Thumbnail Generator</h1>
+                    </div>
                     <p className="thumbnail-subtitle">Create beautiful thumbnails with AI</p>
                 </div>
 

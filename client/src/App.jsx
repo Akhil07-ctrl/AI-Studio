@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FiLinkedin, FiMic, FiImage } from 'react-icons/fi'
 import SocialMediaPost from './components/SocialMediaPost'
 import PodcastGenerator from './components/PodcastGenerator'
 import ThumbnailGenerator from './components/ThumbnailGenerator'
@@ -14,19 +15,22 @@ function App() {
           className={`workflow-tab ${activeWorkflow === 'social' ? 'active' : ''}`}
           onClick={() => setActiveWorkflow('social')}
         >
-          📱 Social
+          <FiLinkedin className="workflow-icon" />
+          LinkedIn
         </button>
         <button
           className={`workflow-tab podcast ${activeWorkflow === 'podcast' ? 'active' : ''}`}
           onClick={() => setActiveWorkflow('podcast')}
         >
-          🎙️ Podcast
+          <FiMic className="workflow-icon" />
+          Podcast
         </button>
         <button
           className={`workflow-tab thumbnail ${activeWorkflow === 'thumbnail' ? 'active' : ''}`}
           onClick={() => setActiveWorkflow('thumbnail')}
         >
-          ✨ Thumbnail
+          <FiImage className="workflow-icon" />
+          Thumbnail
         </button>
       </div>
 

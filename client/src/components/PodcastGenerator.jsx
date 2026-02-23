@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FiMic, FiVolume2, FiCheckCircle, FiAlertCircle } from 'react-icons/fi'
 import '../styles/PodcastGenerator.css'
 
 function PodcastGenerator() {
@@ -50,7 +51,7 @@ function PodcastGenerator() {
 
         } catch (error) {
             console.error('Error:', error)
-            setError('😔 Oops! Something went wrong. Please try again')
+            setError({ message: 'Oops! Something went wrong. Please try again', icon: FiAlertCircle })
         } finally {
             setIsLoading(false)
         }
@@ -59,7 +60,10 @@ function PodcastGenerator() {
     return (
         <div className="workflow-card podcast-card">
             <div className="card-header">
-                <h1 className="card-title podcast-title">🎙️ Podcast Generator</h1>
+                <div className="card-title-with-icon">
+                    <FiMic className="card-icon" />
+                    <h1 className="card-title podcast-title">Podcast Generator</h1>
+                </div>
                 <p className="card-subtitle">Create AI-powered podcasts from any topic</p>
             </div>
 
@@ -87,7 +91,10 @@ function PodcastGenerator() {
                             <span></span>
                         </div>
                     ) : (
-                        <>🔊 Generate Podcast</>
+                        <>
+                            <FiVolume2 className="button-icon" />
+                            Generate Podcast
+                        </>
                     )}
                 </button>
             </form>
@@ -100,11 +107,15 @@ function PodcastGenerator() {
                     </div>
                 ) : error ? (
                     <div className="error-message">
-                        <p>{error}</p>
+                        {error.icon && <error.icon className="error-message-icon" />}
+                        <p>{error.message}</p>
                     </div>
                 ) : audioUrl ? (
                     <div className="audio-ready">
-                        <p className="success-text">✨ Podcast is ready! Click play to listen</p>
+                        <div className="success-text">
+                            <FiCheckCircle className="success-icon" />
+                            Podcast is ready! Click play to listen
+                        </div>
                         <audio controls className="audio-player" src={audioUrl}>
                             Your browser does not support the audio element.
                         </audio>

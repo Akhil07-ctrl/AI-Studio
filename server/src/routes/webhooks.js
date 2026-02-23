@@ -26,13 +26,51 @@ async function handleWebhookProxy(webhookType, body) {
 }
 
 /**
+ * Validate PIN for social media endpoint
+ */
+function validateSocialMediaPin(pin) {
+  const expectedPin = process.env.SOCIAL_MEDIA_PIN;
+
+  if (!expectedPin) {
+    throw new Error('Social media PIN not configured on server');
+  }
+
+  if (!pin) {
+    return {
+      valid: false,
+      message: 'PIN is required to post on social media'
+    };
+  }
+
+  if (pin !== expectedPin) {
+    return {
+      valid: false,
+      message: 'Invalid PIN. Please try again.'
+    };
+  }
+
+  return { valid: true };
+}
+
+/**
  * POST /api/webhook/social-media
- * Generate social media posts from URL content
+ * Generate social media posts from URL content (Protected with PIN)
  */
 router.post('/social-media', async (req, res, next) => {
   try {
-    const { text } = req.body;
+    const { text, pin } = req.body;
 
+    // Validate PIN first
+    const pinValidation = validateSocialMediaPin(pin);
+    if (!pinValidation.valid) {
+      return res.status(401).json({
+        error: 'Authentication failed',
+        message: pinValidation.message,
+        requiresAuth: true
+      });
+    }
+
+    // Validate text
     if (!text || !text.trim()) {
       return res.status(400).json({
         error: 'Text is required',
@@ -40,6 +78,7 @@ router.post('/social-media', async (req, res, next) => {
       });
     }
 
+    // Proceed with webhook call without sending PIN to external service
     const data = await handleWebhookProxy('social-media', { text });
     res.status(200).json(data);
   } catch (error) {
@@ -103,3 +142,4 @@ router.get('/health', (req, res) => {
 });
 
 export default router;
+
