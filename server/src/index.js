@@ -13,21 +13,36 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 // Determine allowed CORS origins
 const getAllowedOrigins = () => {
   if (NODE_ENV === 'production') {
-    // In production, specify exact frontend URL
-    return [
-      process.env.FRONTEND_URL || 'https://your-app.vercel.app'
-    ];
+    // In production, specify exact frontend URL and normalize it (remove trailing slash)
+    const frontendUrl = process.env.FRONTEND_URL || 'https://your-app.vercel.app';
+    return [frontendUrl.replace(/\/$/, '')];
   }
   // Development: allow localhost on any port
   return ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'];
 };
 
 // Middleware
+app.use((req, res, next) => {
+  if (NODE_ENV === 'development') {
+    console.log(`[CORS DEBUG] Request from Origin: ${req.headers.origin} | Method: ${req.method} | Path: ${req.path}`);
+  }
+  next();
+});
+
 app.use(cors({
-  origin: getAllowedOrigins(),
+  origin: (origin, callback) => {
+    const allowed = getAllowedOrigins();
+    // Allow if no origin (like mobile/curl) or if in development or if origin is in allowed list
+    if (!origin || NODE_ENV === 'development' || allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log(`[CORS REJECTED] Origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));

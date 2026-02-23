@@ -40,11 +40,18 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; /* Center vertically for shorter content */
   justify-content: center;
   background: var(--bg-gradient);
   color: var(--text-dark);
   padding: 1rem;
+}
+
+@media (max-height: 700px), (max-width: 640px) {
+  body {
+    align-items: flex-start; /* Start from top on mobile or short viewports to allow scrolling */
+    padding: 1rem 0.5rem;
+  }
 }
 
 #root {

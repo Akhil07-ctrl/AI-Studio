@@ -191,8 +191,12 @@
 /* Responsive Design */
 @media (max-width: 640px) {
     .workflow-card {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.25rem;
         border-radius: 20px;
+    }
+
+    .card-header {
+        margin-bottom: 1.5rem;
     }
 
     .card-title {
@@ -206,11 +210,59 @@
     .url-input {
         padding: 0.875rem 1rem;
         font-size: 0.95rem;
+        border-radius: 12px;
     }
 
     .submit-button {
         padding: 0.875rem 1.25rem;
         font-size: 1rem;
+        border-radius: 12px;
+    }
+
+    .pin-modal {
+        padding: 1.5rem 1.25rem;
+        width: 95%;
+    }
+
+    .pin-modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .pin-digits-container {
+        gap: 0.5rem;
+    }
+
+    .pin-digit-box {
+        width: 40px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .pin-modal-actions {
+        flex-direction: column-reverse;
+        /* Cancel on bottom */
+        gap: 0.75rem;
+    }
+
+    .pin-cancel-btn,
+    .pin-submit-btn {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .workflow-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .pin-digit-box {
+        width: 35px;
+        height: 45px;
     }
 }
 
@@ -366,6 +418,7 @@
 }
 
 @keyframes shake {
+
     0%,
     100% {
         transform: translateX(0);
