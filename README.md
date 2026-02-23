@@ -1,35 +1,37 @@
-# AI Studio 🤖
+# AI Studio
 
-AI Studio is a comprehensive full-stack application for AI-powered content creation. It features a React frontend and Express backend, offering seamless experience for generating social media posts, podcasts, and thumbnails.
+AI Studio is a comprehensive full-stack application for AI-powered content creation. It features a React frontend and Express backend, offering seamless experience for generating LinkedIn posts, podcasts, and thumbnails.
 
-## 🚀 Features
+## Features
 
-### 1. 📱 Social Media Post Generator
-Generate engaging social media content instantly.
+### 1. LinkedIn Post Generator
+Generate engaging LinkedIn content instantly with PIN protection to prevent unauthorized posts.
 - Input a URL or topic
-- Get AI-crafted posts ready for sharing
+- Get AI-crafted LinkedIn posts ready for sharing
+- 6-digit PIN authentication for secure posting
 - Powered by secure backend API
 
-### 2. 🎙️ Podcast Generator
+### 2. Podcast Generator
 Transform text topics into audio podcasts.
 - Enter a topic of interest
 - AI generates and converts to audio
 - Integrated audio player for listening
 
-### 3. ✨ Thumbnail Generator
+### 3. Thumbnail Generator
 Create eye-catching thumbnails for your content.
 - Describe your desired image
 - AI generates high-quality thumbnails
 - Download or regenerate options available
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Frontend:** React 19, Vite 7
+- **Frontend:** React 19, Vite 7, React Icons
 - **Backend:** Express.js, Node.js
 - **Styling:** CSS (Custom styles)
 - **State Management:** React Hooks
 - **API:** RESTful API with Express
 - **CORS:** Backend-handled with secure configuration
+- **Authentication:** PIN-based for LinkedIn posts
 
 ## 📁 Project Structure
 
@@ -89,7 +91,7 @@ npm run dev:client
 
 Then open http://localhost:5173 in your browser.
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Health Check
 - **GET** `/api/health` - Backend status
@@ -97,11 +99,13 @@ Then open http://localhost:5173 in your browser.
 ### Webhook API
 All endpoints are under `/api/webhook/`:
 
-1. **Social Media Post**
+1. **LinkedIn Post Generator** (PIN Protected)
    ```
    POST /api/webhook/social-media
-   Body: { "text": "url_or_content" }
+   Body: { "text": "url_or_content", "pin": "6-digit pin" }
+   Response: Success or PIN validation error
    ```
+   Requires 6-digit PIN for authentication.
 
 2. **Podcast Generator**
    ```
@@ -117,7 +121,7 @@ All endpoints are under `/api/webhook/`:
    Response: Image URL
    ```
 
-## 🔧 Environment Configuration
+## Environment Configuration
 
 ### Frontend (.env.local)
 ```env
@@ -129,6 +133,7 @@ VITE_API_URL=http://localhost:5000  # Backend URL
 PORT=5000
 NODE_ENV=development
 FRONTEND_URL=http://localhost:5173  # For CORS
+SOCIAL_MEDIA_PIN=123456            # 6-digit PIN for LinkedIn posts
 ```
 
 ## 📦 Build & Deployment
@@ -153,6 +158,7 @@ npm run build:client
    PORT=5000
    NODE_ENV=production
    FRONTEND_URL=https://your-app.vercel.app
+   SOCIAL_MEDIA_PIN=your-secure-6-digit-pin
    ```
 
 #### Option B: Render.com
@@ -167,6 +173,7 @@ npm run build:client
    PORT=5000
    NODE_ENV=production
    FRONTEND_URL=https://your-app.vercel.app
+   SOCIAL_MEDIA_PIN=your-secure-6-digit-pin
    ```
 
 ### Deploy Frontend (Vercel)
@@ -183,11 +190,12 @@ npm run build:client
    ```
    (Replace with your Render/Railway backend URL)
 
-## 🔐 CORS & Security
+## Security Features
 
-- Backend has secure CORS configuration
-- Supports development (localhost) and production URLs
-- Set `FRONTEND_URL` environment variable for production
+- **Backend CORS:** Secure configuration supporting development and production URLs
+- **PIN Authentication:** 6-digit PIN protection for LinkedIn posts to prevent unauthorized posting
+- **Set `FRONTEND_URL`** environment variable for production CORS
+- **Set `SOCIAL_MEDIA_PIN`** environment variable for LinkedIn security
 
 ## 📝 Available Scripts
 
@@ -206,7 +214,7 @@ npm start                # Start (server only)
 npm run lint             # Linting (client only)
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### CORS Issues
 - Verify `VITE_API_URL` in client `.env.local` matches backend URL
@@ -215,6 +223,12 @@ npm run lint             # Linting (client only)
 ### Connection Errors
 - Ensure backend runs on port 5000: `GET http://localhost:5000/api/health`
 - Check frontend runs on port 5173
+
+### PIN Authentication Errors
+- LinkedIn post returns 401 error: Verify `SOCIAL_MEDIA_PIN` is set in backend `.env`
+- Ensure PIN is exactly 6 digits
+- Check PIN modal is displayed before posting
+- Verify PIN entered matches the configured PIN in backend
 
 ### Dependencies Issues
 ```bash
@@ -235,4 +249,4 @@ ISC
 
 ---
 
-**Deployed at:** https://ai-studio-five-theta.vercel.app
+**Deployed at:** https://ai-studio-client.vercel.app/
