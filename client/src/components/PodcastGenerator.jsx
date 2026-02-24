@@ -18,7 +18,7 @@ function PodcastGenerator() {
         setAudioUrl(null)
 
         if (!topic.trim()) {
-            setError('Please enter a podcast topic')
+            setError({ text: 'Please enter a podcast topic', icon: FiAlertCircle })
             return
         }
 
@@ -51,18 +51,18 @@ function PodcastGenerator() {
 
         } catch (error) {
             console.error('Error:', error)
-            setError({ message: 'Oops! Something went wrong. Please try again', icon: FiAlertCircle })
+            setError({ text: 'Oops! Something went wrong. Please try again', icon: FiAlertCircle })
         } finally {
             setIsLoading(false)
         }
     }
 
     return (
-        <div className="workflow-card podcast-card">
+        <div className="workflow-card">
             <div className="card-header">
                 <div className="card-title-with-icon">
-                    <FiMic className="card-icon" />
-                    <h1 className="card-title podcast-title">Podcast Generator</h1>
+                    <FiMic className="card-icon podcast-icon" />
+                    <h1 className="card-title">Podcast Generator</h1>
                 </div>
                 <p className="card-subtitle">Create AI-powered podcasts from any topic</p>
             </div>
@@ -71,7 +71,7 @@ function PodcastGenerator() {
                 <div className="form-group">
                     <input
                         type="text"
-                        className="podcast-input"
+                        className="workflow-input podcast-input"
                         placeholder="Type podcast topic here..."
                         value={topic}
                         onChange={(e) => setTopic(e.target.value)}
@@ -106,15 +106,15 @@ function PodcastGenerator() {
                         <p>Creating podcast... please wait!</p>
                     </div>
                 ) : error ? (
-                    <div className="error-message">
-                        {error.icon && <error.icon className="error-message-icon" />}
-                        <p>{error.message}</p>
+                    <div className="message error">
+                        {error.icon && <error.icon />}
+                        <p>{error.text}</p>
                     </div>
                 ) : audioUrl ? (
                     <div className="audio-ready">
-                        <div className="success-text">
-                            <FiCheckCircle className="success-icon" />
-                            Podcast is ready! Click play to listen
+                        <div className="message success">
+                            <FiCheckCircle />
+                            <p>Podcast is ready! Click play to listen</p>
                         </div>
                         <audio controls className="audio-player" src={audioUrl}>
                             Your browser does not support the audio element.

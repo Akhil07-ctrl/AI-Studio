@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiImage } from 'react-icons/fi'
+import { FiImage, FiAlertCircle } from 'react-icons/fi'
 import '../styles/ThumbnailGenerator.css'
 
 function ThumbnailGenerator() {
@@ -17,7 +17,7 @@ function ThumbnailGenerator() {
         setImageUrl(null)
 
         if (!prompt.trim()) {
-            setError('Please describe what your thumbnail should show')
+            setError({ text: 'Please describe what your thumbnail should show', icon: FiAlertCircle })
             return
         }
 
@@ -71,7 +71,7 @@ function ThumbnailGenerator() {
 
         } catch (error) {
             console.error('Error:', error)
-            setError('Something went wrong. Please try again.')
+            setError({ text: 'Something went wrong. Please try again.', icon: FiAlertCircle })
         } finally {
             setIsLoading(false)
         }
@@ -89,62 +89,66 @@ function ThumbnailGenerator() {
     }
 
     return (
-        <div className="thumbnail-container">
-            <div className="thumbnail-card">
-                <div className="thumbnail-header">
-                    <div className="thumbnail-title-with-icon">
-                        <FiImage className="thumbnail-title-icon" />
-                        <h1 className="thumbnail-title">Thumbnail Generator</h1>
-                    </div>
-                    <p className="thumbnail-subtitle">Create beautiful thumbnails with AI</p>
+        <div className="workflow-card">
+            <div className="card-header">
+                <div className="card-title-with-icon">
+                    <FiImage className="card-icon thumbnail-icon" />
+                    <h1 className="card-title">Thumbnail Generator</h1>
                 </div>
-
-                {!imageUrl ? (
-                    <form onSubmit={handleSubmit} className="thumbnail-form">
-                        <div className="form-group">
-                            <textarea
-                                className="thumbnail-textarea"
-                                placeholder="What should your thumbnail show?"
-                                value={prompt}
-                                onChange={(e) => setPrompt(e.target.value)}
-                                disabled={isLoading}
-                                rows="4"
-                            />
-                        </div>
-
-                        {!isLoading ? (
-                            <button type="submit" className="create-button">
-                                Create
-                            </button>
-                        ) : (
-                            <div className="generating-container">
-                                <div className="loading-circle"></div>
-                                <p className="generating-text">Generating your thumbnail...</p>
-                            </div>
-                        )}
-
-                        {error && (
-                            <div className="thumbnail-error">
-                                <p>{error}</p>
-                            </div>
-                        )}
-                    </form>
-                ) : (
-                    <div className="result-container">
-                        <div className="image-wrapper">
-                            <img src={imageUrl} alt="Generated thumbnail" className="generated-image" />
-                        </div>
-                        <div className="action-buttons">
-                            <button onClick={handleDownload} className="download-button">
-                                Download
-                            </button>
-                            <button onClick={() => setImageUrl(null)} className="create-another-button">
-                                Create Another
-                            </button>
-                        </div>
-                    </div>
-                )}
+                <p className="card-subtitle">Create beautiful thumbnails with AI</p>
             </div>
+
+            {!imageUrl ? (
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <textarea
+                            className="workflow-input thumbnail-textarea"
+                            placeholder="What should your thumbnail show?"
+                            value={prompt}
+                            onChange={(e) => setPrompt(e.target.value)}
+                            disabled={isLoading}
+                            rows="4"
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="create-button"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? (
+                            <div className="loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        ) : (
+                            'Create Thumbnail'
+                        )}
+                    </button>
+
+                    {error && (
+                        <div className="message error">
+                            {error.icon && <error.icon />}
+                            <p>{error.text}</p>
+                        </div>
+                    )}
+                </form>
+            ) : (
+                <div className="result-container">
+                    <div className="image-wrapper">
+                        <img src={imageUrl} alt="Generated thumbnail" className="generated-image" />
+                    </div>
+                    <div className="action-buttons">
+                        <button onClick={handleDownload} className="download-button">
+                            Download
+                        </button>
+                        <button onClick={() => setImageUrl(null)} className="create-another-button">
+                            Create Another
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

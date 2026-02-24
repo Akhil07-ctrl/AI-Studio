@@ -85,7 +85,8 @@ function SocialMediaPost() {
             console.error('Error:', error)
             setMessage({
                 type: 'error',
-                text: '😔 Oops! Something went wrong. Please try again.'
+                text: 'Oops! Something went wrong. Please try again.',
+                icon: FiAlertCircle
             })
             setShowPinModal(false)
         } finally {
@@ -112,7 +113,7 @@ function SocialMediaPost() {
             <div className="workflow-card">
                 <div className="card-header">
                     <div className="card-title-with-icon">
-                        <FiLinkedin className="card-icon" />
+                        <FiLinkedin className="card-icon social-icon" />
                         <h1 className="card-title">Create LinkedIn Post</h1>
                     </div>
                     <p className="card-subtitle">Share your content with LinkedIn (Protected)</p>
@@ -122,7 +123,7 @@ function SocialMediaPost() {
                     <div className="form-group">
                         <input
                             type="text"
-                            className="url-input"
+                            className="workflow-input url-input"
                             placeholder="Provide the URL here…"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
@@ -150,7 +151,7 @@ function SocialMediaPost() {
                 {message && (
                     <div className={`message ${message.type}`}>
                         {message.icon && <message.icon />}
-                        {message.text}
+                        <p>{message.text}</p>
                     </div>
                 )}
             </div>
@@ -180,13 +181,13 @@ function SocialMediaPost() {
                                     autoFocus
                                     aria-label="Enter 6-digit PIN"
                                 />
-                                <div 
-                                    className="pin-digits-container" 
+                                <div
+                                    className="pin-digits-container"
                                     onClick={() => document.querySelector('.hidden-pin-input')?.focus()}
                                 >
                                     {[...Array(6)].map((_, index) => (
-                                        <div 
-                                            key={index} 
+                                        <div
+                                            key={index}
                                             className={`pin-digit-box ${index === pin.length ? 'active' : ''} ${pin[index] ? 'filled' : ''}`}
                                         >
                                             {pin[index] ? '*' : ''}

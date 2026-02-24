@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiLinkedin, FiMic, FiImage } from 'react-icons/fi'
+import { FiLinkedin, FiMic, FiImage, FiAlertCircle } from 'react-icons/fi'
 import SocialMediaPost from './components/SocialMediaPost'
 import PodcastGenerator from './components/PodcastGenerator'
 import ThumbnailGenerator from './components/ThumbnailGenerator'
@@ -10,6 +10,10 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="disclaimer-banner">
+        <FiAlertCircle className="disclaimer-icon" />
+        <p>This tool is for local development and testing only. Not intended for production use.</p>
+      </div>
       <div className="workflow-selector">
         <button
           className={`workflow-tab ${activeWorkflow === 'social' ? 'active' : ''}`}
