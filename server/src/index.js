@@ -68,17 +68,17 @@ app.use('/api/webhook', webhookRoutes);
 
 // Redirect legacy endpoints to new structure
 app.post('/api/social-media', (req, res, next) => {
-  req.url = '/api/webhook/social-media';
+  req.url = '/social-media';
   webhookRoutes(req, res, next);
 });
 
 app.post('/api/podcast', (req, res, next) => {
-  req.url = '/api/webhook/podcast';
+  req.url = '/podcast';
   webhookRoutes(req, res, next);
 });
 
 app.post('/api/thumbnail', (req, res, next) => {
-  req.url = '/api/webhook/thumbnail';
+  req.url = '/thumbnail';
   webhookRoutes(req, res, next);
 });
 

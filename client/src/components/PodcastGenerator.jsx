@@ -25,7 +25,7 @@ function PodcastGenerator() {
         setIsLoading(true)
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/podcast`, {
+            const response = await fetch(`${API_BASE_URL}/api/webhook/podcast`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
